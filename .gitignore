@@ -1,0 +1,21 @@
+*.log
+
+# sbt specific
+.cache
+.lib/
+dist/*
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+.idea
+project/project
+
+node_modules
+
+# IDE specific
+.scala_dependencies
+.worksheet
+*.bak
+*.iml
