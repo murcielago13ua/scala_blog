@@ -1,5 +1,6 @@
 package ua.scala_blog.routes
 
+import akka.http.scaladsl.model.{HttpResponse, StatusCodes}
 import akka.http.scaladsl.server._
 import com.softwaremill.session.SessionManager
 import com.softwaremill.session.SessionDirectives._
@@ -30,11 +31,11 @@ class LoginService(usersRepo: UserRepository)
       path("auth" / "login") {
         entity(as[Auth]) { auth =>
           onComplete(usersRepo login auth) {
-            case Failure(e) => complete(StatusCode.InternalServerError)
-            case Success(Left(sc)) => complete(sc)
+            case Failure(e) => complete(HttpResponse(status = StatusCodes.InternalServerError))
+            case Success(Left(sc)) => complete(HttpResponse(status = StatusCodes.Forbidden))
             case Success(Right(userId)) =>
               setSession(oneOff, usingCookies, userId) {
-                complete(StatusCode.Ok)
+                complete(HttpResponse())
               }
           }
         }
