@@ -16,9 +16,9 @@ import scala.concurrent.ExecutionContext
 
 
 trait BackEndModule {
-  lazy val loginService: Service[Authorization] = wire[LoginService]
-  lazy val postsService: Service[Posts] = wire[PostsService]
-  lazy val usersSerivce: Service[Users] = wire[UsersService]
+//  lazy val loginService: Service[Authorization] = wire[LoginService]
+//  lazy val postsService: Service[Posts] = wire[PostsService]
+//  lazy val usersSerivce: Service[Users] = wire[UsersService]
   lazy val indexPage: Routes = IndexPage
 
   lazy implicit val sessionManager: SessionManager[Long] = new SessionManager[Long](
@@ -31,9 +31,9 @@ trait BackEndModule {
   lazy private implicit val dbEc: ExecutionContext @@ Db = ExecutionContext.fromExecutor(Executors.newCachedThreadPool()).taggedWith[Db]
 
   lazy val config: Config = ConfigFactory.load()
-  lazy val db: Database = Database.forConfig("postgresql", config)
-  lazy val userRepository: UserRepository = wire[UserRepository]
-  lazy val postsRepository: PostsRepository = wire[PostsRepository]
+//  lazy val db: Database = Database.forConfig("postgresql", config)
+//  lazy val userRepository: UserRepository = wire[UserRepository]
+//  lazy val postsRepository: PostsRepository = wire[PostsRepository]
 
   lazy implicit val system: ActorSystem = ActorSystem("blog_system")
   lazy implicit val materializer: ActorMaterializer = ActorMaterializer()

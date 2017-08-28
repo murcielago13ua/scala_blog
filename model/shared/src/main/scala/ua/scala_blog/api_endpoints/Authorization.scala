@@ -9,8 +9,8 @@ import ua.scala_blog.model._
 trait Authorization extends CirceEntities {
   val root = path / "auth"
 
-//  val login = endpoint(request(Post, path / "login", jsonRequest[Auth]), jsonResponse[StatusCode Either Long])
-//  val logout = endpoint(request(Post, path / "logout", emptyRequest), jsonResponse[StatusCode])
+  val login = endpoint(request(Post, path / "login", jsonRequest[Auth]), jsonResponse[StatusCode])
+  val logout = endpoint(request(Post, path / "logout", emptyRequest), jsonResponse[StatusCode])
   val signUp = endpoint(request(Put, path / "sign-up", jsonRequest[User]), jsonResponse[StatusCode])
 }
 

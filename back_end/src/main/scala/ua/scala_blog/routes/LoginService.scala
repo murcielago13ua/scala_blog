@@ -8,7 +8,6 @@ import com.softwaremill.session.SessionOptions._
 import ua.scala_blog.api_endpoints._
 import ua.scala_blog.model._
 import ua.scala_blog.repositories.UserRepository
-
 import scala.concurrent.{ExecutionContext, Future}
 import com.softwaremill.tagging._
 import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport
@@ -31,11 +30,11 @@ class LoginService(usersRepo: UserRepository)
       path("auth" / "login") {
         entity(as[Auth]) { auth =>
           onComplete(usersRepo login auth) {
-            case Failure(e) => complete(HttpResponse(status = StatusCodes.InternalServerError))
-            case Success(Left(sc)) => complete(HttpResponse(status = StatusCodes.Forbidden))
+            case Failure(e) => complete(StatusCode.InternalServerError)
+            case Success(Left(sc)) => complete(StatusCode.AccessDenied)
             case Success(Right(userId)) =>
               setSession(oneOff, usingCookies, userId) {
-                complete(HttpResponse())
+                complete(StatusCode.Ok)
               }
           }
         }

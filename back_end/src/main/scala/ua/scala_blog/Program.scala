@@ -11,9 +11,9 @@ object Program extends BackEndModule with Directives {
 
     val routes = Seq(
       pathPrefix("public")(getFromResourceDirectory("public")),
-      loginService.route,
-      postsService.route,
-      usersSerivce.route,
+//      loginService.route,
+//      postsService.route,
+//      usersSerivce.route,
       indexPage.route
     ).reduce(_ ~ _)
 
